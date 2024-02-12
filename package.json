@@ -1,0 +1,14 @@
+{
+  "name": "cenix-vprok",
+  "version": "1.0.0",
+  "description": "node.js puppeteer parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artur Iskhakov",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  }
+}
