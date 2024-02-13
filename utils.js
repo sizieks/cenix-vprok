@@ -4,4 +4,4 @@ const stringifyObject = (object) => {
   }, '');
 };
 
-module.exports = { stringifyObject }
+module.exports = { stringifyObject };
