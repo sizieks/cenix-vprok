@@ -1,0 +1,4 @@
+price=299
+priceOld=499
+rating=5
+reviewCount=1
