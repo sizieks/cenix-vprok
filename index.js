@@ -19,10 +19,10 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
       `${selectors.price.regular}, ${selectors.price.discount}`,
       (el) => +el?.textContent.replace(/[^\d,]/g, '').replace(',', '.')
     ),
-    page.$eval(
-      `${selectors.price.old}`,
-      (el) => +el?.textContent.replace(/[^\d,]/g, '').replace(',', '.') || null
-    ),
+    page.evaluate((selectors) => {
+      const el = document.querySelector(`${selectors.price.old}`);
+      return +el?.textContent.replace(/[^\d,]/g, '').replace(',', '.') || null;
+    }, selectors),
     page.$eval(`${selectors.rating}`, (el) => +el?.textContent || 0),
     page.$eval(
       `${selectors.reviewCount}`,
