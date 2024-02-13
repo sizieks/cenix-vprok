@@ -17,11 +17,11 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
   const [price, priceOld, rating, reviewCount] = await Promise.all([
     page.$eval(
       `${selectors.price.regular}, ${selectors.price.discount}`,
-      (el) => +el?.textContent.replace(',', '.').split(' ')[0]
+      (el) => +el?.textContent.replace(/[^\d,]/g, '').replace(',', '.')
     ),
     page.$eval(
       `${selectors.price.old}`,
-      (el) => +el?.textContent.replace(',', '.').split(' ')[0] || null
+      (el) => +el?.textContent.replace(/[^\d,]/g, '').replace(',', '.') || null
     ),
     page.$eval(`${selectors.rating}`, (el) => +el?.textContent || 0),
     page.$eval(
