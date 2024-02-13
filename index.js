@@ -8,12 +8,14 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 720 });
   await page.goto(`${argv[2]}`, { timeout: 60000 });
-  await page.click('[class^="Region_region"]');
-  await page.waitForSelector('[class^="UiRegionListBase_list"]');
-  await Promise.all([
-    page.waitForNavigation({ timeout: 60000 }),
-    page.click(`[class^="UiRegionListBase_item"] ::-p-text(${argv[3]})`),
-  ]);
+  if (argv[3] && argv[3] !== 'Москва и область') {
+    await page.click('[class^="Region_region"]');
+    await page.waitForSelector('[class^="UiRegionListBase_list"]');
+    await Promise.all([
+      page.waitForNavigation({ timeout: 60000 }),
+      page.click(`[class^="UiRegionListBase_item"] ::-p-text(${argv[3]})`),
+    ]);
+  }
   const [price, priceOld, rating, reviewCount] = await Promise.all([
     page.$eval(
       `${selectors.price.regular}, ${selectors.price.discount}`,
